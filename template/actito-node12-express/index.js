@@ -5,7 +5,7 @@
 
 const express = require("express");
 const app = express();
-const { handler } = require("./hello-actito/build/handler");
+const { handler } = require("./function/build/handler");
 
 app.use(express.json());
 app.disable("x-powered-by");
