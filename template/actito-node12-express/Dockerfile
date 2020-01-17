@@ -35,8 +35,6 @@ RUN npm i || :
 COPY function/ ./
 RUN npm run build
 
-RUN ls -al ./build
-
 # Set correct permissions to use non root user
 WORKDIR /home/app/
 
