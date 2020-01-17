@@ -5,13 +5,29 @@
 
 const express = require("express");
 const app = express();
-const handler = require("./function/build/handler");
+const { handler } = require("./function/build/handler");
 
 app.use(express.json());
 app.disable("x-powered-by");
 
+function getActitoContext(req) {
+  const actitoLicense = req.get("actito-license");
+  const actitoCredentials = req.get("actito-credentials");
+  if (actitoLicense === undefined || actitoCredentials === undefined)
+    return undefined;
+  return {
+    license: actitoLicense,
+    credentials: actitoCredentials
+  };
+}
+
 var middleware = (req, res) => {
-  handler(req, res);
+  const context = getActitoContext(req);
+  if (context === undefined) {
+    res.status(400).send("Invalid actito context");
+    return;
+  }
+  handler(req, res, context);
 };
 
 app.post("/*", middleware);
