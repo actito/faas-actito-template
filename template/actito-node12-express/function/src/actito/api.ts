@@ -1,22 +1,21 @@
 import fetch from "node-fetch";
 import { buildHeader } from "./authenticate";
 
-export const rootV4 = `https://test.actito.be/ActitoWebServices/ws/`;
-export const rootV5 = "https://test.actito.be/actito-publicapi/";
+export type TActitoContext = {
+  license: string;
+  credentials: string;
+};
 
-export type TMethod = "GET" | "POST" | "DELETE" | "PUT";
-export type TBody = object;
+const rootV4 = `https://test.actito.be/ActitoWebServices/ws/`;
+const rootV5 = "https://test.actito.be/actito-publicapi/";
 
-export async function actitoApi(
-  context: TActitoContext,
-  method: TMethod,
-  path: string,
-  body: TBody = {}
-) {
+type TMethod = "GET" | "POST" | "DELETE" | "PUT";
+type TBody = object;
+
+export async function actitoApi(context: TActitoContext, method: TMethod, path: string, body: TBody = {}) {
   const { credentials } = context;
   const actitoRoot = path.startsWith("v5") ? rootV5 : rootV4;
-  const bodyParams =
-    Object.keys(body).length > 0 ? { body: JSON.stringify(body) } : undefined;
+  const bodyParams = Object.keys(body).length > 0 ? { body: JSON.stringify(body) } : undefined;
   const fetchParams = {
     method,
     headers: buildHeader(credentials),
