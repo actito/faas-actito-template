@@ -5,7 +5,8 @@ module.exports = {
   },
   extends: [
     "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended"
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   globals: {
     Atomics: "readonly",
@@ -17,13 +18,5 @@ module.exports = {
     sourceType: "module"
   },
   plugins: ["@typescript-eslint"],
-  rules: {},
-  overrides: [
-    {
-      files: ["*.ts", "*.tsx"],
-      rules: {
-        "@typescript-eslint/no-unused-vars": [2, { args: "none" }]
-      }
-    }
-  ]
+  rules: {}
 };

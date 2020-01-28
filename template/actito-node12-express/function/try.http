@@ -1,7 +1,6 @@
-@openfaasRoot = https://actito.ofc.dev.app.themessagecloud.com
-@functionName = hello-actito
+@openfaasRoot = http://localhost:3000
 
-POST {{openfaasRoot}}/{{functionName}}
+POST {{openfaasRoot}}
 actito-license: my license
 actito-credentials: {{ws-username}}:{{ws-password}}
 Content-Type: application/json

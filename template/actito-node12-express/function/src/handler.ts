@@ -1,10 +1,13 @@
-import { actitoApi, TActitoContext } from "./actito/api";
 import { Response, Request } from "express";
+
+export type TActitoContext = {
+  license: string;
+  credentials: string;
+};
 
 export const handler = async (req: Request, res: Response, context: TActitoContext) => {
   try {
-    const entities = await actitoApi(context, "GET", "v4/entity/");
-    res.status(200).send(entities);
+    res.status(200).send(context.license);
   } catch (err) {
     res.status(400).send(err.toString());
   }
