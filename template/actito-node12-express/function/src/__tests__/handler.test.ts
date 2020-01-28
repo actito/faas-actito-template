@@ -10,9 +10,10 @@ describe("testing function", () => {
 
     const req = ({} as any) as express.Request;
     await handler(req, res, {
-      license: "a license",
+      environment: "test",
+      license: "license",
       credentials: "my credentials"
     });
-    expect(send).toHaveBeenCalledWith("a license");
+    expect(send).toHaveBeenCalledWith("test - license");
   });
 });

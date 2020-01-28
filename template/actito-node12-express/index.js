@@ -8,11 +8,13 @@ app.use(express.json());
 app.disable("x-powered-by");
 
 function getActitoContext(req) {
+  const actitoEnvironment = req.get("actito-environment");
   const actitoLicense = req.get("actito-license");
   const actitoCredentials = req.get("actito-credentials");
   if (actitoLicense === undefined || actitoCredentials === undefined)
     return undefined;
   return {
+    environment: actitoEnvironment,
     license: actitoLicense,
     credentials: actitoCredentials
   };
